@@ -41,7 +41,7 @@ export default function Page(_: PageProps<"/sponsors">) {
         <div className="bg-border grid grid-cols-1 gap-px md:grid-cols-2">
           <SponsorsGrid tier="diamond" />
 
-          {Array.from({ length: SPONSORS.diamond.length % MAX.diamond }).map(
+          {Array.from({ length: MAX.diamond - SPONSORS.diamond.length }).map(
             (__, index) => (
               <AdvertiseCta key={index} tier="diamond" />
             ),
@@ -56,9 +56,7 @@ export default function Page(_: PageProps<"/sponsors">) {
           <SponsorsGrid tier="gold" />
 
           {Array.from({
-            length: !SPONSORS.gold.length
-              ? MAX.gold
-              : SPONSORS.gold.length % MAX.gold,
+            length: MAX.gold - SPONSORS.gold.length,
           }).map((__, index) => (
             <AdvertiseCta key={index} tier="gold" />
           ))}
@@ -72,9 +70,7 @@ export default function Page(_: PageProps<"/sponsors">) {
           <SponsorsGrid tier="silver" />
 
           {Array.from({
-            length: !SPONSORS.silver.length
-              ? MAX.silver
-              : SPONSORS.silver.length % MAX.silver,
+            length: MAX.silver - SPONSORS.silver.length,
           }).map((__, index) => (
             <AdvertiseCta key={index} tier="silver" />
           ))}

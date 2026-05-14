@@ -6,6 +6,7 @@ import { EMAIL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { track } from "@vercel/analytics";
 import { ArrowUpRight, Gem, Crown, Medal, Megaphone } from "lucide-react";
+import { ThemedImage } from "@/components/common/themed-image";
 
 export const SponsorCard = ({
   tier,
@@ -31,7 +32,20 @@ export const SponsorCard = ({
           "h-[170px]": tier === "silver",
         })}
       >
-        <sponsor.image className="size-full p-8 md:p-12 lg:p-16" />
+        {"lg" in sponsor.image ? (
+          <sponsor.image.lg className="size-full p-8 md:p-12 lg:p-16" />
+        ) : (
+          <div className="w-full px-12 h-full md:px-14 lg:px-18 flex items-center justify-center">
+            <ThemedImage
+              light={sponsor.image.light}
+              dark={sponsor.image.dark}
+              alt={sponsor.name}
+              width={332}
+              height={122}
+              className="w-full object-contain"
+            />
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-between px-6 py-4">
         <div className="inline-flex items-center gap-2 text-sm tracking-tight md:text-base">
@@ -74,10 +88,10 @@ export const AdvertiseCta = ({ tier }: { tier: SponsorTier }) => {
         })
       }
     >
-      <Megaphone className="size-8 md:size-10" strokeWidth={1.5} />
+      <Megaphone className="size-6 md:size-8" strokeWidth={1.5} />
       <div className="flex flex-col items-center">
-        <span className="md:text-lg">Become a Sponsor</span>
-        <span className="text-sm md:text-base">
+        <span className="text-sm md:text-base">Become a Sponsor</span>
+        <span className="text-xs md:text-sm">
           {MAX[tier] - SPONSORS[tier].length} / {MAX[tier]} spots left
         </span>
       </div>
@@ -105,7 +119,7 @@ const TIER_ICONS = {
   silver: Medal,
 } as const;
 
-const TIER_TITLES = {
+export const TIER_TITLES = {
   diamond: "Diamond",
   gold: "Gold",
   silver: "Silver",
@@ -125,7 +139,7 @@ export const TierHeader = ({ tier }: { tier: SponsorTier }) => {
 };
 
 export const SponsorsGrid = ({ tier }: { tier: SponsorTier }) => {
-  return SPONSORS[tier].map((sponsor) => (
+  return SPONSORS[tier].map(sponsor => (
     <SponsorCard key={sponsor.id} tier={tier} sponsor={sponsor} />
   ));
 };

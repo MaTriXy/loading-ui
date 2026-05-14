@@ -10,7 +10,7 @@ import { DocsTableOfContents } from "@/components/docs/toc";
 import { mdxComponents } from "@/components/mdx";
 import { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
-import { TurbostarterSidebarCta } from "@/components/home/sponsors/turbostarter";
+import { SponsorsSidebarCta } from "@/components/home/sponsors/sidebar-cta";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const params = await props.params;
@@ -127,7 +127,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
             <DocsTableOfContents toc={page.data.toc} />
           </div>
         ) : null}
-        <TurbostarterSidebarCta />
+        <SponsorsSidebarCta />
       </div>
     </main>
   );
